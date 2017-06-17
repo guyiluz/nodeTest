@@ -3,9 +3,10 @@ const hbs =require('hbs');
 const fs =require('fs')
 var app = express();
 
+const  port = process.env.PORT || 8080
+
 hbs.registerPartials(__dirname + '/views/partials')
 app.set('view engine', 'hbs');
-app.use(express.static(__dirname + '/public'))
 
 app.use((req, res, next)=>{
 
@@ -20,10 +21,12 @@ next()
 
 })
 
-app.use((req, res)=>{
-res.render('mt.hbs')
+// app.use((req, res)=>{
+// res.render('mt.hbs')
+//
+// })
+app.use(express.static(__dirname + '/public'))
 
-})
 hbs.registerHelper('getYear', ()=>{
 
 return new Date().getFullYear()
@@ -52,7 +55,7 @@ app.get('/about', (req,res)=>{
     });
   });
 
-app.listen(8080, ()=>{
+app.listen(port, ()=>{
 
-  console.log("Let's go")
+  console.log(`port ${port}`)
 });
