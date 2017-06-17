@@ -8,6 +8,16 @@ const  port = process.env.PORT || 8080
 hbs.registerPartials(__dirname + '/views/partials')
 app.set('view engine', 'hbs');
 
+var count =1
+
+setInterval(() => {
+  count++
+  fs.appendFile ('test.log', count + '/n', (err) =>{
+console.log("Unable to append to server.log")
+
+  })
+}, 1000);
+
 app.use((req, res, next)=>{
 
   var now = new Date().toString();
